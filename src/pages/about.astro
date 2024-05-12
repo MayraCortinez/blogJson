@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { Button } from "../components/Button";
 ---
 
 <DefaultLayout >
@@ -7,4 +8,5 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
     <h1>
         Bienvenido a mi página sobre mí
     </h1>
+    <Button client:visible/> <!-- Isla, componente interactivo, el js se carga cuando es visible para el cliente. -->
 </DefaultLayout>

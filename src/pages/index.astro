@@ -10,7 +10,7 @@ const posts = await response.json();
 
 			<title slot="head">Página de inicio</title>
 
-			<h1 class="text-center text-3xl text-rose-950 font-bold mb-6 mt-3">Mis Posts</h1>
+			<h1 class="text-center text-3xl text-rose-950 font-bold mb-4 mt-3">Mis Posts</h1>
 
 			<div class="grid max-w-7x1 mx-auto w-full justify-center justify-items-center gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
 				{posts.map((post) => <Post post={post} />)} <!-- Utilizo el método map para convertir el array de objetos proporcionado por db.json en un array de componentes post -->
