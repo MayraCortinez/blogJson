@@ -1,0 +1,25 @@
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+
+---
+
+<DefaultLayout >
+    <title slot="header"> 404 - Not Found </title>
+    <article class="relative overflow-hidden rounded-lg shadow transition hover:shadow-lg w-full h-screen m-0">
+            <img 
+            class="absolute h-full w-screen object-cover bg-no-repeat inset-0 m-0 flex items-center justify-center"
+                style="background-image: url('/public/icon.png')"
+            >  
+ 
+        <div class="relative bg-gradient-to-t from-rose-950/90 to-gray-700/70 w-screen m-auto h-full text-center justify-center flex items-center">
+         <h1 class="m-auto p-6 bg-rose-950/90 rounded  text-white">
+            ERROR 404: 
+            Ups...
+        <p class="p-6 m-auto text-white">Has intentado acceder a "{Astro.url.pathname}" pero la página no existe.</p>  
+        </h1>
+         
+    </div>
+</article>
+</DefaultLayout>
+
+

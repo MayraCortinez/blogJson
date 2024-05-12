@@ -1,0 +1,38 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+export async function getStaticPaths() {
+    const response = await fetch("http://localhost:3000/posts");
+    const posts = await response.json();
+    return posts.map(post => {
+        return {
+            params: {id:post.id}
+        }
+    })
+}
+const {id} = Astro.params;
+const postResponse = await fetch(`http://localhost:3000/posts/${id}`)
+const {title,description,content,imgPath} = await postResponse.json()
+---
+
+<DefaultLayout>
+
+    <div class="py-6">
+        <article class="bg-gradient-to-t from-rose-950/90 to-gray-400/80 text-white max-w-4xl max-h-sm mx-auto px-5 py-6 flex flex-col gap-2 rounded-lg shadow-xl">
+            
+            <h2 class="text-2xl font-bold pb-6">
+                {title}
+            </h2>
+            
+            <img 
+                src={imgPath} 
+                alt="imágen de mujer con laptop"
+                class="rounded h-48 w-full md:h-96 md:w-full m-auto object-cover">
+            <p class="font-bold p-4">
+                {description}
+            </p>
+            <p class="p-4 shadow-inner rounded-lg" style="box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2)">
+               { content } 
+            <p>
+        </article>
+    </div>
+</DefaultLayout>
