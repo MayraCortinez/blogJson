@@ -1,6 +1,6 @@
 export async function getPosts() {
     try {
-      const response = await fetch('https://dazzling-bublanina-0e6228.netlify.app/public/db.json');
+      const response = await fetch('https://dazzling-bublanina-0e6228.netlify.app/db.json');
       const data = await response.json();
       return data.posts;
     } catch (error) {
