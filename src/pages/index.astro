@@ -1,19 +1,20 @@
----
+
+
+
+  ---
 import Post from "../components/Post.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-const response = await fetch("http://localhost:3000/posts"); 
-const posts = await response.json();
----
 
-
-		<DefaultLayout>
-
-			<title slot="head">Página de inicio</title>
-
-			<h1 class="text-center text-3xl text-rose-950 font-bold mb-4 mt-3">Mis Posts</h1>
-
-			<div class="grid max-w-7x1 mx-auto w-full justify-center justify-items-center gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
-				{posts.map((post) => <Post post={post} />)} <!-- Utilizo el método map para convertir el array de objetos proporcionado por db.json en un array de componentes post -->
-			</div>
-
-		</DefaultLayout>
+import {getPosts} from '../utils/getPosts'
+const posts = await getPosts();
+  ---
+  
+  <DefaultLayout >
+    <div class="grid max-w-7x1 mx-auto w-full justify-center justify-items-center gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
+    </div>
+  </DefaultLayout>
+  
+ 

@@ -1,18 +1,38 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
-export async function getStaticPaths() {                            /* Si una página usa parámetros dinámicos en el nombre del archivo, ese componente necesitará exportar una función getStaticPaths().
-                                                                    Esta función es necesaria porque Astro es un creador de sitios estáticos. Eso significa que todo su sitio se construye con anticipación. Si Astro no sabe generar una página en el momento de la creación, los usuarios no la verán cuando visiten el sitio. */
-    const response = await fetch("http://localhost:3000/posts");
-    const posts = await response.json();
-    return posts.map(post => {
-        return {
-            params: {id:post.id}
+import {getPosts} from '../../utils/getPosts'
+
+export async function getStaticPaths() {
+	
+    const posts = await getPosts();
+
+	return posts.map((post) => {
+	  return {
+		params: { id: post.id },
+		props: { post },
+	  };
+	});
+  }
+  
+  export async function getStaticProps({ params }) {
+
+    const posts = await getPosts();
+
+    const post = posts.find(post => post.id.toString() === params.id);
+
+    return {
+        props: {
+            title: post.title,
+            description: post.description,
+            content: post.content,
+            imgPath: post.imgPath
         }
-    })
+    };
 }
-const {id} = Astro.params;
-const postResponse = await fetch(`http://localhost:3000/posts/${id}`)
-const {title,description,content,imgPath} = await postResponse.json()
+
+const { id } = Astro.params;
+
+const {post: {title, description, content, imgPath}} = Astro.props;
 ---
 
 <DefaultLayout>
