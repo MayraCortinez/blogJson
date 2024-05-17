@@ -1,12 +1,9 @@
-
-
-
   ---
 import Post from "../components/Post.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import data from '../../data/db.json'
 
-import {getPosts} from '../utils/getPosts'
-const posts = await getPosts();
+const posts = data.posts;
   ---
   
   <DefaultLayout >
